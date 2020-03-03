@@ -1,3 +1,4 @@
+
 import constants from './../constants';
 const { initialState, types } = constants;
 
@@ -20,6 +21,16 @@ const lyricChangeReducer = (state = initialState.songsById, action) => {
     });
     newSongsByIdStateSlice = Object.assign({}, state, {
       [action.currentSongId]: newSongsByIdEntry
+    });
+    return newSongsByIdStateSlice;
+  case types.REQUEST_SONG:
+    newSongsByIdEntry = {
+      isFetching: true,
+      title: action.title,
+      songId: action.songId
+    };
+    newSongsByIdStateSlice = Object.assign({}, state, {
+      [action.songId]: newSongsByIdEntry
     });
     return newSongsByIdStateSlice;
   default:
